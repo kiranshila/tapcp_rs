@@ -1,4 +1,8 @@
+# tapcp_rs
 
+A rust implementation of the [TAPCP](https://github.com/casper-astro/mlib_devel/blob/m2021a/jasper_library/sw/jam/casper_tapcp.c) protocol for interacting with certain CASPER Collaboration FPGA boards.
+
+Currently not quite feature complete, mainly missing interactions with the flash memory.
 
 ## Why does this include an implementation of TFTP
 
