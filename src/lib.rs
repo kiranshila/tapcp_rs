@@ -1,5 +1,5 @@
 mod csl;
-mod tftp;
+pub mod tftp;
 
 use std::{collections::HashMap, ffi::CStr, net::UdpSocket};
 
