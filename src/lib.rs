@@ -18,17 +18,9 @@ pub fn help(socket: &mut UdpSocket) -> anyhow::Result<String> {
     Ok(std::str::from_utf8(&bytes)?.to_string())
 }
 
-/// The representation of an interal "yellow block" device, returned from `listdev`
-#[derive(Debug, Copy, Clone)]
-pub struct Device {
-    /// The offset in FPGA memory of this register (I'm not sure this is ever needed)
-    pub addr: u32,
-    /// The number of bytes stored at this location
-    pub length: u32,
-}
-
 /// Gets the list of all devices supported by the currently running gateware
-pub fn listdev(socket: &mut UdpSocket) -> anyhow::Result<HashMap<String, Device>> {
+/// Returns a hash map from device name to (addr,length)
+pub fn listdev(socket: &mut UdpSocket) -> anyhow::Result<HashMap<String, (u32, u32)>> {
     // Create the hash map we'll be constructing to hold the device list
     let mut dev_map = HashMap::new();
 
@@ -67,7 +59,7 @@ pub fn listdev(socket: &mut UdpSocket) -> anyhow::Result<HashMap<String, Device>
         let length = u32::from_be_bytes(value[4..].try_into()?);
 
         // Finally, push this all to our hash map
-        dev_map.insert(key, Device { addr, length });
+        dev_map.insert(key, (addr, length));
     }
     Ok(dev_map)
 }

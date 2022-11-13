@@ -3,11 +3,7 @@
 //! The TFTP servers that TAPCP clients are running do not support the RFC 2348
 //! Blocksize Option, so all data blocks must be 512 bytes or fewer.
 
-use std::{
-    fmt::Display,
-    net::{ToSocketAddrs, UdpSocket},
-    str::FromStr,
-};
+use std::{fmt::Display, net::UdpSocket, str::FromStr};
 
 use anyhow::bail;
 use num_derive::{FromPrimitive, ToPrimitive};
