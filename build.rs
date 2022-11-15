@@ -4,7 +4,10 @@ use std::env;
 use std::path::PathBuf;
 
 fn main() {
-    cc::Build::new().file("vendor/csl.c").compile("csl");
+    cc::Build::new()
+        .file("vendor/csl.c")
+        .pic(true)
+        .compile("csl");
     println!("cargo:rerun-if-changed=wrapper.h");
     let bindings = bindgen::Builder::default()
         .header("wrapper.h")
